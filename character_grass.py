@@ -2,7 +2,6 @@ from pico2d import *
 
 open_canvas()
 
-# fill here
 grass = load_image('grass.png')
 character = load_image('character.png')
 
@@ -13,6 +12,5 @@ while (x < 800):
     character.draw_now(x, 90)
     x = x + 2
     delay(0.01)
-
 
 close_canvas()
