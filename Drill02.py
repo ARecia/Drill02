@@ -6,57 +6,40 @@ open_canvas()
 grass = load_image('grass.png')
 character = load_image('character.png')
 
-while(1):
-    x=400
-    while (x<800,):
-        clear_canvas_now()
-        grass.draw_now(400,30)
-        character.draw_now(x,90)
+# 캐릭터 초기 위치 및 상태
+character_x, character_y = 400, 90  # 초기 위치 (원 중심)
+radius = 200  # 원의 반지름
+angle = 0  # 각도 초기값
+is_circle = True  # 원운동 상태
 
-        x=x+2
-        delay(0.01)
-        if x == 800:
+while True:
+    clear_canvas()
+
+    # 배경 이미지 그리기
+    grass.draw(400, 30)
+
+    # 캐릭터 그리기
+    character.draw(character_x, character_y)
+
+    # 원운동과 사각형 운동을 번갈아가며 수행
+    if is_circle:
+        # 원운동
+        character_x = 400 + radius * math.cos(math.radians(angle))
+        character_y = 300 + radius * math.sin(math.radians(angle))
+        angle += 1
+        if angle >= 360:
+            angle = 0
             break
+    else:
+        # 사각형 운동
+        character_x += 2
+        if character_x > 600:
+            is_circle = True
 
-    y=90
-    while(y<600):
-        clear_canvas_now()
-        grass.draw_now(400, 30)
-        character.draw_now(800,y)
+    update_canvas()
 
-        y=y+2
-        delay(0.01)
-        if y == 600:
-            break
-    x=800
-    while(x>0):
-        clear_canvas_now()
-        grass.draw_now(400, 30)
-        character.draw_now(x, 600)
 
-        x=x-2
-        delay(0.01)
-        if x == 0:
-            break
-    y=600
-    while(y>60):
-        clear_canvas_now()
-        grass.draw_now(400, 30)
-        character.draw_now(0, y)
 
-        y=y-2
-        delay(0.01)
-        if y == 60:
-            break
-
-    x=0
-    while(x<400):
-        clear_canvas_now()
-        grass.draw_now(400, 30)
-        character.draw_now(x, 90)
-
-        x = x + 2
-        delay(0.01)
 
 
 
